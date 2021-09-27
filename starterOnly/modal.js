@@ -1,150 +1,156 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
+// ========== DOM ELEMENTS ==========
 
-// DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
+const modalBackground = document.querySelector(".background");
+const modalBtns = document.querySelectorAll(".modal-btn");
 const closeModalBtn = document.querySelector(".close");
-const formData = document.querySelectorAll(".formData");
-const firstName = document.getElementById("first");
-const lastName = document.getElementById("last");
-const email = document.getElementById("email");
-const birthDate = document.getElementById("birthdate");
-const tournamentsQuantity = document.getElementById("quantity");
-const cities = document.querySelectorAll(".checkbox-input input[type='radio']");
-const conditions = document.getElementById("checkbox1");
-const nextEvents = document.getElementById("checkbox2");
+
+const formDatas = document.querySelectorAll(".formData");
+
+const firstNameInput = document.getElementById("first");
+const lastNameInput = document.getElementById("last");
+const emailInput = document.getElementById("email");
+const birthDateInput = document.getElementById("birthdate");
+const tournamentsQuantityInput = document.getElementById("quantity");
+const locationsInputs = document.querySelectorAll(".checkbox-input input[name='location']");
+const conditionsInput = document.getElementById("checkbox1");
+
 const modalSubmitBtn = document.querySelector(".btn-submit");
 
-// Regex (for email)
-const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+// ========== FUNCTIONS AND EVENTS ==========
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+// ---------- Adapt navigation bar to responsive disposition ----------
 
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
+// Function
+function adaptNavigationBarToResponsive() {
+  var topNavigationBar = document.getElementById("myTopnav");
+  if (topNavigationBar.className === "topnav") {
+    topNavigationBar.className += " responsive";
+  }
+  else {
+    topNavigationBar.className = "topnav";
+  }
 }
 
-// close modal event
+// Event
+// DO EVENT TO ADAPT NAVIGATION BAR !!!!!!!!
+
+
+// ---------- Launch modal ----------
+
+// Function
+function launchModal() {
+  modalBackground.style.display = "block";
+}
+
+// Event
+modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
+
+
+// ---------- Close modal ----------
+
+// Function
+function closeModal() {
+  modalBackground.style.display = "none";
+}
+
+// Event
 closeModalBtn.addEventListener("click", closeModal);
 
-// close modal form
-function closeModal() {
-  modalbg.style.display = "none";
+
+// ---------- Submit modal ----------
+
+// Function: Show error message if input not valid
+function showErrorMessage(input, message) {
+  const formData = input.parentElement;
+  formData.className = 'formData error'
+  const errorMessage = formData.querySelector('.errorMessage');
+  errorMessage.innerText = message;
 }
 
-// submit modal event
-//modalSubmitBtn.addEventListener("click", isFormValid);
+// Function: Show validation page if all inputs are valid
+function showValidationPage() {
+  // DO SOMETHING !!!!!!!!
+  console.log("Merci pour votre inscription ! Votre réservation a bien été prise en compte.");
+}
 
-modalSubmitBtn.addEventListener("click", function(event) {
+// Function: Check if all inputs are valid
+function checkInputValidation() {
+  
+  let fields = {
+    firstName: false,
+    lastName: false,
+    email: false,
+    birthDate: false,
+    tournamentsQuantity: false,
+    location: false,
+    conditions: false
+  };
+
+  // Nécessaire ?
+  firstNameInput.setCustomValidity("");
+  lastNameInput.setCustomValidity("");
+  emailInput.setCustomValidity("");
+  birthDateInput.setCustomValidity("");
+  tournamentsQuantityInput.setCustomValidity("");
+  //locationsInputs.setCustomValidity("");
+  conditionsInput.setCustomValidity("");
+
+  if (firstNameInput.value.length < 2) {
+    showErrorMessage(firstNameInput, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
+    //formDatas[0].setAttribute(data-error, true);
+  }
+
+  if (lastNameInput.value.length < 2) {
+    showErrorMessage(lastNameInput, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
+  }
+
+  // Regex (for email)
+  const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (emailInput.value.length == 0) {
+    showErrorMessage(emailInput, "Veuillez saisir une adresse e-mail.");
+  }
+  else if (regexEmail.test(emailInput.value) == false) {
+    showErrorMessage(emailInput, "Veuillez saisir une adresse e-mail valide.");
+  }
 
   let todayDate = new Date();
-  let today = todayDate.getFullYear()+'-'+(todayDate.getMonth()+1)+'-'+todayDate.getDate();
-
-  let fields = {
-    "firstNameField": false,
-    "lastNameField": false,
-    "emailField": false,
-    "birthDateField": false,
-    "tournamentsQuantityField": false,
-    "citiesField": false,
-    "conditionsField": false
-  };
-  console.log(fields);
-
-  if (firstName.value.length < 2) {
-    firstName.setCustomValidity("Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
+  if (birthDateInput.value == null) {
+    showErrorMessage(birthDateInput, "Veuillez entrer votre date de naissance.");
   }
-  else {
-    firstName.setCustomValidity("");
+  else if (birthDateInput.value == todayDate.getTime()) { // Corriger ça
+    showErrorMessage(birthDateInput, "La date de naissance doit être antérieure à aujourd'hui.");
   }
 
-  if (lastName.value.length < 2) {
-    lastName.setCustomValidity("Veuillez entrer 2 caractères ou plus pour le champ du nom.");
-  }
-  else {
-    lastName.setCustomValidity("");
+  if (tournamentsQuantityInput.value.length == 0) {
+    showErrorMessage(tournamentsQuantityInput, "Veuillez saisir un nombre de tournois (supérieur ou égal à 0).");
   }
 
-  if (email.value.length == 0) {
-    email.setCustomValidity("Veuillez saisir une adresse e-mail.");
-  }
-  else if (re.test(email.value) == false) {
-    email.setCustomValidity("Veuillez saisir une adresse e-mail valide.");
-  }
-  else {
-    email.setCustomValidity("");
-  }
-
-  if (birthDate.value == null) {
-    birthDate.setCustomValidity("Veuillez entrer votre date de naissance.")
-  }
-  else if (birthDate.value == todayDate.getTime()) { // Corriger ça
-    birthDate.setCustomValidity("La date de naissance doit être antérieure à aujourd'hui.");
-  }
-  else {
-    birthDate.setCustomValidity("");
-  }
-
-  console.log('firstName', firstName.value);
-  console.log('lastName', lastName.value);
-  console.log('email', email.value, re.test(email.value));
-  console.log('birthdate', birthDate.value, todayDate.getTime());
-  console.log('birthdate year', birthDate.value.getFullYear());
-
-  while (false in fields) {
-    // Don't close form
-  }
-  //if (false not in fields) {
-    // Faire message de confirmation de la soumission
-    //console.log("Merci pour votre inscription ! Votre réservation a bien été prise en compte.");
+  //if (tournamentsQuantityInput.value.length == 0) {
+  //  showErrorMessage(emailInput, "Veuillez choisir une ville.");
   //}
-});
 
+  if (conditionsInput.value == 0) {
+    showErrorMessage(conditionsInput, "Vous devez vérifier que vous acceptez les termes et conditions.");
+  }
+  
+  console.log('firstName', firstNameInput.value);
+  console.log('lastName', lastNameInput.value);
+  console.log('email', emailInput.value, re.test(emailInput.value));
+  console.log('birthdate', birthDateInput.value, todayDate.getTime());
+  console.log('birthdate year', birthDateInput.value.getFullYear());
 
-
-// submit modal and check if it is valid
-function isFormValid(firstName, lastName, email, birthDate, tournamentsQuantity, cities, conditions) {
-
-  if (birthDate.type = "date") {
-    fields["birthDateField"] = true;
-  }
-  else {
-    console.log("Vous devez entrer votre date de naissance.");
-  }
-
-  if (tournamentsQuantity.type == "number" && cities.length > 0) {
-    fields["tournamentsQuantityField"] = true;
-    fields["citiesField"] = true;
-  }
-  else if (tournamentsQuantity.type != "number") {
-    console.log("Vous devez saisir un nombre de tournois (supérieur ou égal à 0.");
-  }
-  else if (cities.length == 0) {
-    console.log("Vous devez choisir une ville.");
-  }
-
-  if (conditions) {
-    fields["conditionsField"] = true;
-  }
-  else {
-    console.log("Vous devez vérifier que vous acceptez les termes et conditions.");
-  }
-
-  if (fields == true) {
-    console.log("Le formulaire soumis est bien valide.");
-  }
-  else {
+  while (false in fields == true) {
     console.log("Le formulaire soumis n'est pas valide.");
-    "click".preventDefault();    // keep form informations if not validated
+  }
+  if (false in fields == false) {
+    console.log("Le formulaire soumis est bien valide.");
+    showValidationPage();
   }
 }
+
+// Event
+modalSubmitBtn.addEventListener("click", function(event) {
+  event.preventDefault();     // Keep form informations if not valid
+  checkInputValidation();
+});
