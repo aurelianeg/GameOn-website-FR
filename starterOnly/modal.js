@@ -11,7 +11,7 @@ const lastNameInput = document.getElementById("last");
 const emailInput = document.getElementById("email");
 const birthDateInput = document.getElementById("birthdate");
 const tournamentsQuantityInput = document.getElementById("quantity");
-const locationsInputs = document.querySelectorAll(".checkbox-input input[name='location']");
+const locationsInputs = document.getElementsByName("location");
 const conditionsInput = document.getElementById("checkbox1");
 
 const modalSubmitBtn = document.querySelector(".btn-submit");
@@ -65,13 +65,16 @@ function showErrorMessage(input, message) {
   const formData = input.parentElement;
   formData.className = 'formData error'
   const errorMessage = formData.querySelector('.errorMessage');
-  errorMessage.innerText = message;
+  errorMessage.innerHTML = message;
+  input.focus();
 }
 
-// Function: Show validation page if all inputs are valid
-function showValidationPage() {
-  // DO SOMETHING !!!!!!!!
-  console.log("Merci pour votre inscription ! Votre réservation a bien été prise en compte.");
+// Function: Hide error message if input was not valid
+function showSuccess(input) {
+  const formData = input.parentElement;
+  formData.className = 'formData success';
+  const errorMessage = formData.querySelector('.errorMessage');
+  errorMessage.innerHTML = '';
 }
 
 // Function: Check if all inputs are valid
@@ -87,70 +90,114 @@ function checkInputValidation() {
     conditions: false
   };
 
-  // Nécessaire ?
-  firstNameInput.setCustomValidity("");
-  lastNameInput.setCustomValidity("");
-  emailInput.setCustomValidity("");
-  birthDateInput.setCustomValidity("");
-  tournamentsQuantityInput.setCustomValidity("");
-  //locationsInputs.setCustomValidity("");
-  conditionsInput.setCustomValidity("");
-
-  if (firstNameInput.value.length < 2) {
-    showErrorMessage(firstNameInput, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
-    //formDatas[0].setAttribute(data-error, true);
+  // First name input
+  if (firstNameInput.value.length == 0) {
+    showErrorMessage(firstNameInput, "Veuillez saisir votre prénom.");
+  }
+  else if (firstNameInput.value.length < 2) {
+    showErrorMessage(firstNameInput, "Veuillez entrer 2 caractères ou plus pour le prénom.");
+  }
+  else {
+    showSuccess(firstNameInput);
+    fields.firstName = true;
   }
 
+  // Last name input
+  if (lastNameInput.value.length == 0) {
+    showErrorMessage(lastNameInput, "Veuillez saisir votre nom.");
+  }
   if (lastNameInput.value.length < 2) {
-    showErrorMessage(lastNameInput, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
+    showErrorMessage(lastNameInput, "Veuillez entrer 2 caractères ou plus pour le nom.");
+  }
+  else {
+    showSuccess(lastNameInput);
+    fields.lastName = true;
   }
 
-  // Regex (for email)
+  // Email input
   const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (emailInput.value.length == 0) {
-    showErrorMessage(emailInput, "Veuillez saisir une adresse e-mail.");
+    showErrorMessage(emailInput, "Veuillez saisir votre adresse e-mail.");
   }
   else if (regexEmail.test(emailInput.value) == false) {
-    showErrorMessage(emailInput, "Veuillez saisir une adresse e-mail valide.");
+    showErrorMessage(emailInput, "Veuillez saisir un format d'adresse e-mail valide.");
+  }
+  else {
+    showSuccess(emailInput);
+    fields.email = true;
   }
 
+  // Birthdate input
   let todayDate = new Date();
-  if (birthDateInput.value == null) {
+  let birthDateInputDate = new Date(birthDateInput.value);
+  if (birthDateInput.value == '') {
     showErrorMessage(birthDateInput, "Veuillez entrer votre date de naissance.");
   }
-  else if (birthDateInput.value == todayDate.getTime()) { // Corriger ça
+  else if (birthDateInputDate >= todayDate) {
     showErrorMessage(birthDateInput, "La date de naissance doit être antérieure à aujourd'hui.");
   }
+  else {
+    showSuccess(birthDateInput);
+    fields.birthDate = true;
+  }
 
+  // Tournament quantity input
   if (tournamentsQuantityInput.value.length == 0) {
     showErrorMessage(tournamentsQuantityInput, "Veuillez saisir un nombre de tournois (supérieur ou égal à 0).");
   }
+  else {
+    showSuccess(tournamentsQuantityInput, fields.tournamentsQuantity);
+    fields.tournamentsQuantity = true;
+  }
 
-  //if (tournamentsQuantityInput.value.length == 0) {
-  //  showErrorMessage(emailInput, "Veuillez choisir une ville.");
-  //}
+  // Location choice inputs
+  let locationChecked = false;
+  for (var i = 0; i < locationsInputs.length; i++) {
+    if(locationsInputs[i].checked) {
+      locationChecked = true;
+      break;
+    }
+  }
+  if(!locationChecked) {
+    showErrorMessage(locationsInputs[0], "Veuillez choisir une ville.");
+  }
+  else {
+    showSuccess(locationsInputs[0]);
+    fields.location = true;
+  }
 
-  if (conditionsInput.value == 0) {
+  // Conditions checked input
+  if (conditionsInput.checked == false) {
     showErrorMessage(conditionsInput, "Vous devez vérifier que vous acceptez les termes et conditions.");
   }
-  
-  console.log('firstName', firstNameInput.value);
-  console.log('lastName', lastNameInput.value);
-  console.log('email', emailInput.value, re.test(emailInput.value));
-  console.log('birthdate', birthDateInput.value, todayDate.getTime());
-  console.log('birthdate year', birthDateInput.value.getFullYear());
+  else {
+    showSuccess(conditionsInput);
+    fields.conditions = true;
+  }
 
-  while (false in fields == true) {
+  // Submit form if all fields are valid
+  let fieldsValues = Object.values(fields);
+  console.log('fieldsValues', fieldsValues);
+  if (fieldsValues.includes(false) == true) {
     console.log("Le formulaire soumis n'est pas valide.");
+    return false;
   }
-  if (false in fields == false) {
+  if (fieldsValues.includes(false) == false) {
     console.log("Le formulaire soumis est bien valide.");
-    showValidationPage();
+    return true;
   }
+}
+
+// Function: Show validation page if all inputs are valid
+function showValidationPage() {
+  // DO SOMETHING !!!!!!!!
+  console.log("Merci pour votre inscription ! Votre réservation a bien été prise en compte.");
 }
 
 // Event
 modalSubmitBtn.addEventListener("click", function(event) {
   event.preventDefault();     // Keep form informations if not valid
-  checkInputValidation();
+  if (checkInputValidation()) {
+    showValidationPage();
+  }
 });

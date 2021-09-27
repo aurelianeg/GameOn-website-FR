@@ -3,8 +3,8 @@
   --font-slab: var(--font-default);
   --modal-duration: 0.8s;
   --primary-color: #FE142F;
+  --secondary-color: #279E7A;
   --error-color: #FF4E60;
-  --checkbox-color: #279E7A;
 }
 
 * {
@@ -218,7 +218,7 @@ main {
 }
 
 .modal-btn:hover {
-  background: var(--checkbox-color);
+  background: var(--secondary-color);
 }
 
 .btn-signup {
@@ -359,18 +359,12 @@ input {
   border-radius: 8px;
   font-size: 20px;
   height: 48px;
-  /*position: relative;*/
 }
 
-.formData {
-  position: relative;
-}
 .formData .errorMessage {
   color: var(--error-color);
-  font-size: 12px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  font-size: 14px;
+  height: 20px;
   visibility: hidden;
 }
 
@@ -378,32 +372,19 @@ input {
   visibility: visible;
 }
 
-.formData.error::after {
-  /*content: attr(data-error);*/
-  font-size: 0.4em;
-  color: var(--error-color);
-  display: block;
-  margin-top: 7px;
-  margin-bottom: 7px;
-  text-align: right;
-  line-height: 0.3;
-  opacity: 0;
-  transition: 0.3s;
-}
-
-.formData.error::after {
-  opacity: 1;
+.formData.success .errorMessage {
+  visibility: hidden;
 }
 
 .formData.error .text-control {
   border: 2px solid var(--error-color);
 }
-/* 
-input[data-error]::after {
+/*
+input.error::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
-} */
+}*/
 
 .checkbox-label,
 .checkbox2-label {
@@ -418,7 +399,7 @@ input[data-error]::after {
   display: block;
   width: 20px;
   height: 20px;
-  border: 2px solid var(--checkbox-color);
+  border: 2px solid var(--secondary-color);
   border-radius: 50%;
   text-indent: 29px;
   white-space: nowrap;
@@ -433,7 +414,7 @@ input[data-error]::after {
   content: "";
   width: 13px;
   height: 13px;
-  background-color: var(--checkbox-color);
+  background-color: var(--secondary-color);
   border-radius: 50%;
   text-indent: 29px;
   white-space: nowrap;
@@ -455,7 +436,7 @@ input[data-error]::after {
 }
 
 .checkbox-input:checked + .checkbox2-label .checkbox-icon {
-  background: var(--checkbox-color);
+  background: var(--secondary-color);
 }
 
 .checkbox2-label .checkbox-icon {
@@ -494,7 +475,7 @@ input[data-error]::after {
 }
 
 .btn-submit:hover {
-  background: var(--checkbox-color);
+  background: var(--secondary-color);
 }
 
 

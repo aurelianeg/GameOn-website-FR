@@ -73,7 +73,7 @@
 
           <div class="modal-body">
 
-            <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+            <form name="reserve" action="index.html" method="get" onsubmit="return checkInputValidation();">
 
               <div
                 class="formData">
@@ -86,10 +86,7 @@
                   minlength="2"
                   required
                 /><br>
-                <div
-                  class="errorMessage">
-                  Error Message
-                  </div>
+                <span class="errorMessage"></span>
               </div>
 
               <div
@@ -103,10 +100,7 @@
                   minlength="2"
                   required
                 /><br>
-                <div
-                  class="errorMessage">
-                  Error Message
-                </div>
+                <span class="errorMessage"></span>
               </div>
 
               <div
@@ -119,10 +113,7 @@
                   name="email"
                   required
                 /><br>
-                <div
-                  class="errorMessage">
-                  Error Message
-                </div>
+                <span class="errorMessage"></span>
               </div>
 
               <div
@@ -135,10 +126,7 @@
                   name="birthdate"
                   required
                 /><br>
-                <div
-                  class="errorMessage">
-                  Error Message
-                </div>
+                <span class="errorMessage"></span>
               </div>
 
               <div
@@ -153,10 +141,7 @@
                   max="99"
                   required
                 >
-                <div
-                  class="errorMessage">
-                  Error Message
-                </div>
+                <span class="errorMessage"></span>
               </div>
 
               <p class="text-label">Quelles villes ?</p>
@@ -229,10 +214,8 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
-                <div
-                  class="errorMessage">
-                  Error Message
-                </div>
+                <br>
+                <span class="errorMessage"></span>
               </div>
 
               <div
@@ -249,10 +232,7 @@
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <div
-                  class="errorMessage">
-                  Error Message
-                </div>
+                <span class="errorMessage"></span>
                 <input
                   class="checkbox-input"
                   type="checkbox"
