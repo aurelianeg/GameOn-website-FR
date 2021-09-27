@@ -2,6 +2,9 @@
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
   --modal-duration: 0.8s;
+  --primary-color: #FE142F;
+  --error-color: #FF4E60;
+  --checkbox-color: #279E7A;
 }
 
 * {
@@ -75,13 +78,13 @@ img {
 }
 
 .topnav a:hover {
-  background-color: #ff0000;
+  background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 15px;
 }
 
 .topnav a.active {
-  background-color: #ff0000;
+  background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 15px;
 }
@@ -204,7 +207,7 @@ main {
 
 .modal-btn {
   font-size: 145%;
-  background: #fe142f;
+  background: var(--primary-color);
   display: flex;
   margin: auto;
   padding: 2em;
@@ -215,11 +218,11 @@ main {
 }
 
 .modal-btn:hover {
-  background: #3876ac;
+  background: var(--checkbox-color);
 }
 
 .btn-signup {
-  background: #fe142f;
+  background: var(--primary-color);
   display: block;
   border-radius: 7px;
   color: #fff;
@@ -356,11 +359,15 @@ input {
   border-radius: 8px;
   font-size: 20px;
   height: 48px;
-  position: relative;
+  /*position: relative;*/
 }
 
+.formData {
+  position: relative;
+}
 .formData .errorMessage {
-  color: #e54858;
+  color: var(--error-color);
+  font-size: 12px;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -368,14 +375,13 @@ input {
 }
 
 .formData.error .errorMessage {
-  color: blue;
   visibility: visible;
 }
 
 .formData.error::after {
   /*content: attr(data-error);*/
   font-size: 0.4em;
-  color: #e54858;
+  color: var(--error-color);
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
@@ -390,7 +396,7 @@ input {
 }
 
 .formData.error .text-control {
-  border: 2px solid #e54858;
+  border: 2px solid var(--error-color);
 }
 /* 
 input[data-error]::after {
@@ -412,7 +418,7 @@ input[data-error]::after {
   display: block;
   width: 20px;
   height: 20px;
-  border: 2px solid #279e7a;
+  border: 2px solid var(--checkbox-color);
   border-radius: 50%;
   text-indent: 29px;
   white-space: nowrap;
@@ -427,7 +433,7 @@ input[data-error]::after {
   content: "";
   width: 13px;
   height: 13px;
-  background-color: #279e7a;
+  background-color: var(--checkbox-color);
   border-radius: 50%;
   text-indent: 29px;
   white-space: nowrap;
@@ -449,7 +455,7 @@ input[data-error]::after {
 }
 
 .checkbox-input:checked + .checkbox2-label .checkbox-icon {
-  background: #279e7a;
+  background: var(--checkbox-color);
 }
 
 .checkbox2-label .checkbox-icon {
@@ -476,7 +482,7 @@ input[data-error]::after {
   padding: 1em;
   border-radius: 15px;
   font-size: 16px;
-  background: #fe142f;
+  background: var(--primary-color);
   display: block;
   margin: 0 auto;
   border-radius: 7px;
@@ -488,7 +494,7 @@ input[data-error]::after {
 }
 
 .btn-submit:hover {
-  background: #3876ac;
+  background: var(--checkbox-color);
 }
 
 
@@ -508,7 +514,7 @@ footer {
 }
 
 .copyrights {
-  color: #fe142f;
+  color: var(--primary-color);
   padding: 0;
   font-size: 1rem;
   margin: 60px 0 30px;
