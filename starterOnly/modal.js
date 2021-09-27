@@ -1,8 +1,8 @@
 // ========== DOM ELEMENTS ==========
 
-const modalBackground = document.querySelector(".background");
+const modalBackground = document.querySelector(".modal-background");
 const modalBtns = document.querySelectorAll(".modal-btn");
-const closeModalBtn = document.querySelector(".close");
+const closeModalBtn = document.querySelector(".modal-close");
 
 const formDatas = document.querySelectorAll(".formData");
 
@@ -15,6 +15,10 @@ const locationsInputs = document.getElementsByName("location");
 const conditionsInput = document.getElementById("checkbox1");
 
 const modalSubmitBtn = document.querySelector(".btn-submit");
+
+const registrationConfirmationBackground = document.querySelector(".confirmation-background");
+const registrationConfirmationContent = document.querySelector(".confirmation-content");
+const registrationConfirmationCloseBtn = document.querySelector(".btn-close");
 
 
 // ========== FUNCTIONS AND EVENTS ==========
@@ -188,16 +192,28 @@ function checkInputValidation() {
   }
 }
 
-// Function: Show validation page if all inputs are valid
-function showValidationPage() {
-  // DO SOMETHING !!!!!!!!
-  console.log("Merci pour votre inscription ! Votre réservation a bien été prise en compte.");
+// Function: Launch registration confirmation if all inputs are valid
+function launchRegistrationConfirmation() {
+  registrationConfirmationBackground.style.display = "block";
 }
 
 // Event
 modalSubmitBtn.addEventListener("click", function(event) {
   event.preventDefault();     // Keep form informations if not valid
   if (checkInputValidation()) {
-    showValidationPage();
+    closeModal();
+    launchRegistrationConfirmation();
   }
 });
+
+// ---------- Close registration confirmation ----------
+
+// Function
+function closeRegistrationConfirmation() {
+  registrationConfirmationContent.classList.toggle('isClosed');
+  // TRY TO MAKE CONFIRMATION DISAPPEAR LIKE MODAL APPEARED!!!!!
+  registrationConfirmationBackground.style.display = "none";
+}
+
+// Event
+registrationConfirmationCloseBtn.addEventListener("click", closeRegistrationConfirmation);
