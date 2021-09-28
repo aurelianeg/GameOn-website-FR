@@ -2,7 +2,7 @@
 
 const modalBackground = document.querySelector(".modal-background");
 const modalBtns = document.querySelectorAll(".modal-btn");
-const closeModalBtn = document.querySelector(".modal-close");
+const modalCloseCross = document.querySelector(".modal-close");
 
 const formDatas = document.querySelectorAll(".formData");
 
@@ -19,7 +19,7 @@ const modalSubmitBtn = document.querySelector(".btn-submit");
 const registrationConfirmationBackground = document.querySelector(".confirmation-background");
 const registrationConfirmationContent = document.querySelector(".confirmation-content");
 const registrationConfirmationCloseBtn = document.querySelector(".btn-close");
-
+const regsitrationConfirmationCloseCross = document.querySelector(".confirmation-close");
 
 // ========== FUNCTIONS AND EVENTS ==========
 
@@ -27,12 +27,12 @@ const registrationConfirmationCloseBtn = document.querySelector(".btn-close");
 
 // Function
 function adaptNavigationBarToResponsive() {
-  var topNavigationBar = document.getElementById("myTopnav");
-  if (topNavigationBar.className === "topnav") {
-    topNavigationBar.className += " responsive";
+  var navigationBar = document.getElementById("header_nav_container");
+  if (navigationBar.className === "header_nav_container") {
+    navigationBar.className += " responsive";
   }
   else {
-    topNavigationBar.className = "topnav";
+    navigationBar.className = "header_nav_container";
   }
 }
 
@@ -59,7 +59,7 @@ function closeModal() {
 }
 
 // Event
-closeModalBtn.addEventListener("click", closeModal);
+modalCloseCross.addEventListener("click", closeModal);
 
 
 // ---------- Submit modal ----------
@@ -217,3 +217,4 @@ function closeRegistrationConfirmation() {
 
 // Event
 registrationConfirmationCloseBtn.addEventListener("click", closeRegistrationConfirmation);
+regsitrationConfirmationCloseCross.addEventListener("click", closeRegistrationConfirmation);

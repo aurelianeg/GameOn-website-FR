@@ -62,20 +62,20 @@ img {
 
 /* ========== HEADER AND NAVIGATION BAR ========== */
 
-.topnav {
+.header_nav_container {
   overflow: hidden;
-  margin: 3.5%;
+  margin : 3.5%;
 }
 
-.header-logo {
-    float: left;
+.header {
+  float: left;
 }
 
-.main-navbar {
-    float: right;
+.nav {
+  float: right;
 }
 
-.topnav a {
+.header_nav_container a {
   float: left;
   display: block;
   color: #000000;
@@ -87,27 +87,27 @@ img {
   font-family: Roboto, sans-serif;
 }
 
-.topnav a:hover {
+.header_nav_container a:hover {
   background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 15px;
 }
 
-.topnav a.active {
+.header_nav_container a.active {
   background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 15px;
 }
 
-.topnav .icon {
+.header_nav_container .icon {
   display: none;
 }
 
 @media screen and (max-width: 540px) {
-  .topnav a {
+  .header_nav_container a {
     display: none;
   }
-  .topnav a.icon {
+  .header_nav_container a.icon {
     float: right;
     display: block;
     margin-top: -15px;
@@ -115,25 +115,25 @@ img {
 } 
 
 @media screen and (max-width: 768px) {
-  .topnav a {
+  .header_nav_container a {
     display: none;
   }
-  .topnav a.icon {
+  .header_nav_container a.icon {
     float: right;
     display: block;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {
+  .header_nav_container.responsive {
     position: relative;
   }
-  .topnav.responsive .icon {
+  .header_nav_container.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .topnav.responsive a {
+  .header_nav_container.responsive a {
     float: none;
     display: block;
     text-align: left;
@@ -155,9 +155,9 @@ main {
 }
 
 
-/* ---------- Hero section ---------- */
+/* ---------- Presentation section ---------- */
 
-.hero-section {
+.presentation {
   min-height: 93vh;
   border-radius: 10px;
   display: grid;
@@ -167,7 +167,7 @@ main {
   margin-bottom: 10px;
 }
 
-.hero-content {
+.presentation-content {
   padding: 51px 67px;
   grid-column: span 4;
   background: #232323;
@@ -176,7 +176,7 @@ main {
   text-align: left;
   min-width: 424px;
 }
-.hero-content::after {
+.presentation-content::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -186,29 +186,29 @@ main {
   top: 0;
 }
 
-.hero-content > * {
+.presentation-content > * {
   position: relative;
   z-index: 1;
 }
 
-.hero-headline {
+.presentation-headline {
   font-size: 6rem;
   font-weight: normal;
   white-space: nowrap;
 }
 
-.hero-text {
+.presentation-text {
   width: 146%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
 }
 
-.hero-img {
+.presentation-img {
   grid-column: span 8;
 }
 
-.hero-img img {
+.presentation-img {
   width: 100%;
   height: 100%;
   display: block;
@@ -246,39 +246,39 @@ main {
   margin-top: 59px;
 }
 
-.hero-section > .btn-signup {
+.presentation > .btn-signup {
   display: none;
 }
 
 @media screen and (max-width: 800px) {
-  .hero-section {
+  .presentation {
     display: block;
     box-shadow: unset;
   }
-  .hero-content {
+  .presentation-content {
     background: #fff;
     color: #000;
     padding: 20px;
   }
-  .hero-content::after {
+  .presentation-content::after {
     content: unset;
   }
-  .hero-content .btn-signup {
+  .presentation-content .btn-signup {
     display: none;
   }
-  .hero-headline {
+  .presentation-headline {
     font-size: 4.5rem;
     white-space: normal;
   }
-  .hero-text {
+  .presentation-text {
     width: unset;
     font-size: 1.5rem;
   }
-  .hero-img img {
+  .presentation-img {
     border-radius: 10px;
     margin-top: 40px;
   }
-  .hero-section > .btn-signup {
+  .presentation > .btn-signup {
     display: block;
     margin: 32px auto 10px;
     padding: 12px 35px;
@@ -523,6 +523,36 @@ input.error::after {
 .confirmation-content.isClosed {
   animation-name: confirmationclose;
   animation-duration: var(--modal-duration);
+}
+
+.confirmation-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  z-index: 1;
+  transform: scale(0.7);
+}
+
+.confirmation-close:before,
+.confirmation-close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 3px;
+  background-color: #fff;
+}
+
+.confirmation-close:before {
+  transform: rotate(45deg);
+}
+
+.confirmation-close:after {
+  transform: rotate(-45deg);
 }
 
 .confirmation-text {
