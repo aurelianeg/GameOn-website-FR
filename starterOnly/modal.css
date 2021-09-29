@@ -314,7 +314,7 @@ main {
   padding-top: 10px;
 }
 
-.modal-close {
+.cross-close {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -322,11 +322,12 @@ main {
   height: 32px;
   opacity: 1;
   cursor: pointer;
+  z-index: 1;
   transform: scale(0.7);
 }
 
-.modal-close:before,
-.modal-close:after {
+.cross-close:before,
+.cross-close:after {
   position: absolute;
   left: 15px;
   content: " ";
@@ -335,11 +336,11 @@ main {
   background-color: #fff;
 }
 
-.modal-close:before {
+.cross-close:before {
   transform: rotate(45deg);
 }
 
-.modal-close:after {
+.cross-close:after {
   transform: rotate(-45deg);
 }
 
@@ -523,36 +524,6 @@ input.error::after {
 .confirmation-content.isClosed {
   animation-name: confirmationclose;
   animation-duration: var(--modal-duration);
-}
-
-.confirmation-close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  width: 32px;
-  height: 32px;
-  opacity: 1;
-  cursor: pointer;
-  z-index: 1;
-  transform: scale(0.7);
-}
-
-.confirmation-close:before,
-.confirmation-close:after {
-  position: absolute;
-  left: 15px;
-  content: " ";
-  height: 33px;
-  width: 3px;
-  background-color: #fff;
-}
-
-.confirmation-close:before {
-  transform: rotate(45deg);
-}
-
-.confirmation-close:after {
-  transform: rotate(-45deg);
 }
 
 .confirmation-text {
