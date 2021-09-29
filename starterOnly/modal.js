@@ -19,13 +19,15 @@ const modalSubmitBtn = document.querySelector(".btn-submit");
 const registrationConfirmationBackground = document.querySelector(".confirmation-background");
 const registrationConfirmationContent = document.querySelector(".confirmation-content");
 const registrationConfirmationCloseBtn = document.querySelector(".btn-close");
-const regsitrationConfirmationCloseCross = document.querySelector(".confirmation-close");
+const registrationConfirmationCloseCross = document.querySelector(".confirmation-close");
 
 // ========== FUNCTIONS AND EVENTS ==========
 
-// ---------- Adapt navigation bar to responsive disposition ----------
+// ---------- Navigation bar adaptation ----------
 
-// Function
+/**
+ * Adapt navigation bar to responsive disposition
+ */
 function adaptNavigationBarToResponsive() {
   var navigationBar = document.getElementById("header_nav_container");
   if (navigationBar.className === "header_nav_container") {
@@ -34,37 +36,36 @@ function adaptNavigationBarToResponsive() {
   else {
     navigationBar.className = "header_nav_container";
   }
+  console.log('pouet');
 }
 
-// Event
-// DO EVENT TO ADAPT NAVIGATION BAR !!!!!!!!
+// ---------- Modal visibility ----------
 
-
-// ---------- Launch modal ----------
-
-// Function
+/**
+ * Modal launching
+ */
 function launchModal() {
   modalBackground.style.display = "block";
 }
 
-// Event
-modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
-
-
-// ---------- Close modal ----------
-
-// Function
+/**
+ * Modal closing
+ */
 function closeModal() {
   modalBackground.style.display = "none";
 }
 
-// Event
+modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
 modalCloseCross.addEventListener("click", closeModal);
 
 
-// ---------- Submit modal ----------
+// ---------- Modal submission ----------
 
-// Function: Show error message if input not valid
+/**
+ * Show error message if input not valid
+ * @param {Object} input - The given input
+ * @param {string} message - The error message
+ */
 function showErrorMessage(input, message) {
   const formData = input.parentElement;
   formData.className = 'formData error'
@@ -73,7 +74,10 @@ function showErrorMessage(input, message) {
   input.focus();
 }
 
-// Function: Hide error message if input was not valid
+/**
+ * Hide error message if input was not valid
+ * @param {Object} input 
+ */
 function showSuccess(input) {
   const formData = input.parentElement;
   formData.className = 'formData success';
@@ -81,7 +85,10 @@ function showSuccess(input) {
   errorMessage.innerHTML = '';
 }
 
-// Function: Check if all inputs are valid
+/**
+ * Check if all inputs are valid
+ * @returns {Boolean}
+ */
 function checkInputValidation() {
   
   let fields = {
@@ -95,11 +102,15 @@ function checkInputValidation() {
   };
 
   // First name input
+  const regexAsciiLetters = /[a-zA-Z]/;
   if (firstNameInput.value.length == 0) {
     showErrorMessage(firstNameInput, "Veuillez saisir votre prénom.");
   }
   else if (firstNameInput.value.length < 2) {
     showErrorMessage(firstNameInput, "Veuillez entrer 2 caractères ou plus pour le prénom.");
+  }
+  else if (regexAsciiLetters.test(firstNameInput.value) == false) {
+    showErrorMessage(firstNameInput, "Veuillez entrer des caractères de A à Z (sans accents).");
   }
   else {
     showSuccess(firstNameInput);
@@ -112,6 +123,9 @@ function checkInputValidation() {
   }
   if (lastNameInput.value.length < 2) {
     showErrorMessage(lastNameInput, "Veuillez entrer 2 caractères ou plus pour le nom.");
+  }
+  else if (regexAsciiLetters.test(lastNameInput.value) == false) {
+    showErrorMessage(lastNameInput, "Veuillez entrer des caractères de A à Z (sans accents).");
   }
   else {
     showSuccess(lastNameInput);
@@ -181,18 +195,17 @@ function checkInputValidation() {
 
   // Submit form if all fields are valid
   let fieldsValues = Object.values(fields);
-  console.log('fieldsValues', fieldsValues);
   if (fieldsValues.includes(false) == true) {
-    console.log("Le formulaire soumis n'est pas valide.");
     return false;
   }
   if (fieldsValues.includes(false) == false) {
-    console.log("Le formulaire soumis est bien valide.");
     return true;
   }
 }
 
-// Function: Launch registration confirmation if all inputs are valid
+/**
+ * Launch registration confirmation if all inputs are valid
+ */
 function launchRegistrationConfirmation() {
   registrationConfirmationBackground.style.display = "block";
 }
@@ -206,15 +219,18 @@ modalSubmitBtn.addEventListener("click", function(event) {
   }
 });
 
-// ---------- Close registration confirmation ----------
+// ---------- Registration visibility ----------
 
-// Function
+/**
+ * Close registration confirmation when done
+ */
 function closeRegistrationConfirmation() {
   registrationConfirmationContent.classList.toggle('isClosed');
-  // TRY TO MAKE CONFIRMATION DISAPPEAR LIKE MODAL APPEARED!!!!!
-  registrationConfirmationBackground.style.display = "none";
+  setTimeout(() => {
+    registrationConfirmationContent.classList.remove('isClosed');
+    registrationConfirmationBackground.style.display = "none";
+  }, 800);
 }
 
-// Event
 registrationConfirmationCloseBtn.addEventListener("click", closeRegistrationConfirmation);
-regsitrationConfirmationCloseCross.addEventListener("click", closeRegistrationConfirmation);
+registrationConfirmationCloseCross.addEventListener("click", closeRegistrationConfirmation);
