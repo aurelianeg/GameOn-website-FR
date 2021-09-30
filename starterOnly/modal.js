@@ -36,7 +36,6 @@ function adaptNavigationBarToResponsive() {
   else {
     navigationBar.className = "header_nav_container";
   }
-  console.log('pouet');
 }
 
 // ---------- Modal visibility ----------
