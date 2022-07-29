@@ -14,19 +14,19 @@ The desktop and mobile designs are available on [Figma](https://www.figma.com/fi
 
 ### Features
 
-- Add feature to close the modal.
-- Link labels to inputs in HTML.
-- Verify that the form is valid when user clicks on "Submit".
-- Verify that data are valid:
+- Users can now close the modal.
+- Labels are linked to inputs in HTML.
+- A verification that the form is valid is made when user clicks on "Submit".
+- Data validity is verified:
     * First name has 2 characters min / is not empty.
     * Last name has 2 characters min / is not empty.
     * E-mail address is valid.
-    * For the number of competitions, a numeric value must be entered.
+    * For the number of competitions, a numeric value is entered.
     * A radio button is selected.
     * General conditions are checked, the other is not mandatory.
 - Form data is retained if form is not valid.
-- Add custom error messages for each field.
-- Add a confirmation message after submitting valid form.
+- Custom error messages are added to each field.
+- A confirmation modal is shown after submitting a valid form.
 
 
 ## Launch
