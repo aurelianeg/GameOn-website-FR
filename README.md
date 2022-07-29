@@ -1,6 +1,6 @@
 # GameOn
 
-GameOn![^1] is a company specialized in conferences and game competitions. They reworked their website to simplify home page and inscription to contests.
+GameOn[^1] is a company specialized in conferences and game competitions. They reworked their website to simplify home page and inscription to contests.
 
 **Goal of this project**: Add missing JavaScript to make the website and form functional (introduction to JavaScript).
 
