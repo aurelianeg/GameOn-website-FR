@@ -6,10 +6,9 @@ GameOn[^1] is a company specialized in conferences and game competitions. They r
 
 ## Load specifications
 
-### Website designs
+### Design
 
-The desktop and mobile designs are available on Figma:
-https://www.figma.com/file/B7NKBDvSI18uoMLJgpnh48/UI-Design-GameOn-FR
+The desktop and mobile designs are available on [Figma](https://www.figma.com/file/B7NKBDvSI18uoMLJgpnh48/UI-Design-GameOn-FR).
 
 ![Design for the home page](./design/homepage.png "Design for the home page")
 
