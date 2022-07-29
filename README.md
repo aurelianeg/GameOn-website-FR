@@ -19,12 +19,12 @@ https://www.figma.com/file/B7NKBDvSI18uoMLJgpnh48/UI-Design-GameOn-FR
 - Link labels to inputs in HTML.
 - Verify that the form is valid when user clicks on "Submit".
 - Verify that data are valid:
-...* First name has 2 characters min / is not empty.
-...* Last name has 2 characters min / is not empty.
-...* E-mail address is valid.
-...* For the number of competitions, a numeric value must be entered.
-...* A radio button is selected.
-...* General conditions are checked, the other is not mandatory.
+    * First name has 2 characters min / is not empty.
+    * Last name has 2 characters min / is not empty.
+    * E-mail address is valid.
+    * For the number of competitions, a numeric value must be entered.
+    * A radio button is selected.
+    * General conditions are checked, the other is not mandatory.
 - Form data is retained if form is not valid.
 - Add custom error messages for each field.
 - Add a confirmation message after submitting valid form.
